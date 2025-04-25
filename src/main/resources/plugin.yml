@@ -1,0 +1,7 @@
+name: BlazeyRedStonePvP
+version: '1.0'
+main: me.vesder.blazeyRedStonePvP.BlazeyRedStonePvP
+api-version: '1.20'
+authors: [ vesder124 ]
+description: Official BlazeNetwork Lobby DoubleJump Plugin
+website: https://discord.gg/8cq9WqjwUX
