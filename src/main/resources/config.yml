@@ -1,0 +1,35 @@
+Radio:
+  error-msg:
+    - ""
+  permisison: ""
+CustomPotions:
+HitRewards:
+  Mythical:
+    drop: "REDSTONE"
+    amount: 10
+    permission: "group.mythical"
+  Blaze:
+    drop: "REDSTONE"
+    amount: 7
+    permission: "group.blaze"
+  Immortal:
+    drop: "REDSTONE"
+    amount: 6
+    permission: "group.immortal"
+  Villain:
+    drop: "REDSTONE"
+    amount: 5
+    permission: "group.villain"
+  Elite:
+    drop: "REDSTONE"
+    amount: 4
+    permission: "group.elite"
+  magical:
+    drop: "REDSTONE"
+    amount: 3
+    permission: "group.magical"
+  Witch:
+    drop: "REDSTONE"
+    amount: 2
+    permission: "group.witch"
+Converters:

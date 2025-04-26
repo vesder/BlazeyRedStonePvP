@@ -1,6 +1,9 @@
 package me.vesder.blazeyRedStonePvP;
 
+import me.vesder.blazeyRedStonePvP.commands.CommandManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Objects;
 
 import static me.vesder.blazeyRedStonePvP.utils.TextUtils.color;
 import static org.bukkit.Bukkit.getConsoleSender;
@@ -32,7 +35,7 @@ public final class BlazeyRedStonePvP extends JavaPlugin {
 //        getPluginManager().registerEvents(new TaxSystem(), this);
 
         // Register commands
-//        Objects.requireNonNull(getCommand("vent-add")).setExecutor(new AddVentCommand());
+        Objects.requireNonNull(getCommand("rspc")).setExecutor(new CommandManager());
 
         // Check if the config was just created (i.e. it didn't exist before)
 
