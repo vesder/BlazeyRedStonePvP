@@ -35,12 +35,12 @@ public class CommandManager implements TabExecutor {
 
         if (args.length == 0) {
 
-            player.sendMessage(color("<gradient:#EF473A:#CB2D3E>======================</gradient>"));
+            player.sendMessage(color("<gradient:#F3904F:#CB2D3E>============================================</gradient>"));
             for (SubCommand subCommand : getSubCommands()) {
-                player.sendMessage(color("<gradient:#EF473A:#CB2D3E>" + subCommand.getSyntax() + "</gradient>"));
-                player.sendMessage(color("<gradient:#EF473A:#CB2D3E>" + subCommand.getDescription() + "</gradient>"));
+                player.sendMessage(color("<gradient:#F3904F:#CB2D3E>" + subCommand.getSyntax() + "</gradient>"));
+                player.sendMessage(color("<gradient:#F3904F:#CB2D3E>" + subCommand.getDescription() + "</gradient>"));
             }
-            player.sendMessage(color("<gradient:#EF473A:#CB2D3E>======================</gradient>"));
+            player.sendMessage(color("<gradient:#F3904F:#CB2D3E>============================================</gradient>"));
 
             return true;
         }
