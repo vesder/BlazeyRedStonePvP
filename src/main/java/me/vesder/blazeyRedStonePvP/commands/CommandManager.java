@@ -1,5 +1,6 @@
 package me.vesder.blazeyRedStonePvP.commands;
 
+import me.vesder.blazeyRedStonePvP.commands.subcommands.SetCommand;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -17,8 +18,7 @@ public class CommandManager implements TabExecutor {
     private ArrayList<SubCommand> subCommands = new ArrayList<>();
 
     public CommandManager() {
-//        subcommands.add(new ExplodeCommand());
-//        subcommands.add(new FreezeCommand());
+        subCommands.add(new SetCommand());
     }
 
     public ArrayList<SubCommand> getSubCommands() {
@@ -56,6 +56,25 @@ public class CommandManager implements TabExecutor {
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+
+        if (args.length == 1){
+            ArrayList<String> subcommandsArguments = new ArrayList<>();
+
+            for (SubCommand subCommand : getSubCommands()){
+                subcommandsArguments.add(subCommand.getName());
+            }
+
+            return subcommandsArguments;
+        }else if(args.length >= 2){
+            for (SubCommand subCommand : getSubCommands()){
+                if (args[0].equalsIgnoreCase(subCommand.getName())){
+                    return subCommand.getSubcommandArguments((Player) sender, args);
+                }
+            }
+        }
+
+
+
         return List.of();
     }
 }

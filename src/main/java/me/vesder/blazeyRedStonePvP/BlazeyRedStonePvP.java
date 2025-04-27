@@ -23,7 +23,7 @@ public final class BlazeyRedStonePvP extends JavaPlugin {
         plugin = this;
 
         // Save the default configuration if it doesn't already exist
-//        saveDefaultConfig();
+        saveDefaultConfig();
 
         // Create and start the CombatLog task for periodic updates of BossBars
 //        DamageListener damageListener = new DamageListener();
@@ -35,7 +35,7 @@ public final class BlazeyRedStonePvP extends JavaPlugin {
 //        getPluginManager().registerEvents(new TaxSystem(), this);
 
         // Register commands
-        Objects.requireNonNull(getCommand("rspc")).setExecutor(new CommandManager());
+        Objects.requireNonNull(getCommand("rs")).setExecutor(new CommandManager());
 
         // Check if the config was just created (i.e. it didn't exist before)
 
