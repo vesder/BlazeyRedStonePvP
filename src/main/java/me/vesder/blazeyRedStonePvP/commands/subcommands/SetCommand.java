@@ -4,6 +4,7 @@ import me.vesder.blazeyRedStonePvP.commands.SubCommand;
 import me.vesder.blazeyRedStonePvP.config.DataConfig;
 import me.vesder.blazeyRedStonePvP.utils.MessageUtils;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.Player;
 
@@ -59,20 +60,35 @@ public class SetCommand extends SubCommand {
             Location blockLoc = player.getTargetBlockExact(5).getLocation();
 
             if (args[1].equalsIgnoreCase("Frame")) {
-                if (player.getTargetEntity(5) instanceof ItemFrame frame) {
 
-                    dataNewList.add(
-                            blockLoc.getWorld().getName() + "/" +
-                                    blockLoc.getBlockX() + "/" +
-                                    blockLoc.getBlockY() + "/" +
-                                    blockLoc.getBlockZ() + "/" +
-                                    frame.getItem().getType()
-                    );
+                if (!(player.getTargetEntity(5) instanceof ItemFrame frame)) {
 
-                } else {
+                    player.sendMessage(MessageUtils.blockNotFound());
+                    return;
+
+                }
+
+                dataNewList.add(
+                        blockLoc.getWorld().getName() + "/" +
+                        blockLoc.getBlockX() + "/" +
+                        blockLoc.getBlockY() + "/" +
+                        blockLoc.getBlockZ() + "/" +
+                        frame.getItem().getType()
+                );
+
+            } else if (args[1].equalsIgnoreCase("RepairAnvil")) {
+
+                if (player.getTargetBlockExact(5).getType() != Material.ANVIL) {
                     player.sendMessage(MessageUtils.blockNotFound());
                     return;
                 }
+
+                dataNewList.add(
+                        blockLoc.getWorld().getName() + "/" +
+                        blockLoc.getBlockX() + "/" +
+                        blockLoc.getBlockY() + "/" +
+                        blockLoc.getBlockZ()
+                );
 
             } else {
 
