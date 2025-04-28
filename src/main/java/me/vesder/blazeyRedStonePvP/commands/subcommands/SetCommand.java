@@ -2,6 +2,7 @@ package me.vesder.blazeyRedStonePvP.commands.subcommands;
 
 import me.vesder.blazeyRedStonePvP.commands.SubCommand;
 import me.vesder.blazeyRedStonePvP.config.DataConfig;
+import me.vesder.blazeyRedStonePvP.utils.MessageUtils;
 import org.bukkit.Location;
 import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.Player;
@@ -13,6 +14,14 @@ import static me.vesder.blazeyRedStonePvP.utils.TextUtils.color;
 
 public class SetCommand extends SubCommand {
 
+    List<String> arguments = List.of(
+
+            "RedstoneConverter",
+            "GoldConverter",
+            "EmeraldConverter",
+            "RepairAnvil",
+            "Frame"
+    );
 
     @Override
     public String getName() {
@@ -32,8 +41,14 @@ public class SetCommand extends SubCommand {
     @Override
     public void perform(Player player, String[] args) {
 
-        if (args.length == 1 || !args[1].matches("RedstoneConverter|GoldConverter|EmeraldConverter|RepairAnvil|Frame")) {
-            player.sendMessage("ERROR");
+        if (args.length == 1 || !args[1].matches(String.join("|",arguments))) {
+
+            player.sendMessage(color(
+                            "<gradient:#F3904F:#CB2D3E>Available gadgets : \n" +
+                            String.join(", ",arguments) +
+                                    "\n" + getSyntax() + "</gradient>"
+            ));
+
             return;
         }
 
@@ -55,7 +70,7 @@ public class SetCommand extends SubCommand {
                     );
 
                 } else {
-                    player.sendMessage(color("<gradient:#F3904F:#CB2D3E>Block Mord Nazar Yaft Nashod</gradient>"));
+                    player.sendMessage(MessageUtils.blockNotFound());
                     return;
                 }
 
@@ -70,10 +85,10 @@ public class SetCommand extends SubCommand {
             }
 
             DataConfig.getInstance().set(args[1],dataNewList);
-            player.sendMessage(color("<gradient:#FFE259:#FFA751>" + args[1] + " Ba Movafaghit Set Shod !</gradient>"));
+            player.sendMessage(MessageUtils.gadgetSet(args[1]));
 
         }catch (NullPointerException ex) {
-            player.sendMessage(color("<gradient:#F3904F:#CB2D3E>Block Mord Nazar Yaft Nashod</gradient>"));
+            player.sendMessage(MessageUtils.blockNotFound());
         }
 
     }
@@ -82,13 +97,6 @@ public class SetCommand extends SubCommand {
     public List<String> getSubcommandArguments(Player player, String[] args) {
 
         if (args.length == 2) {
-
-            List<String> arguments = new ArrayList<>();
-            arguments.add("RedstoneConverter");
-            arguments.add("GoldConverter");
-            arguments.add("EmeraldConverter");
-            arguments.add("RepairAnvil");
-            arguments.add("Frame");
 
             return arguments;
         }
