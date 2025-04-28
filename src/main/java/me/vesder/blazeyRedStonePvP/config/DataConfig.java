@@ -1,0 +1,51 @@
+package me.vesder.blazeyRedStonePvP.config;
+
+import me.vesder.blazeyRedStonePvP.BlazeyRedStonePvP;
+import org.bukkit.configuration.file.YamlConfiguration;
+
+import java.io.File;
+
+public class DataConfig {
+
+    private final static DataConfig instance = new DataConfig();
+
+    private File file;
+    private YamlConfiguration config;
+
+    private DataConfig() {
+
+    }
+
+    public void load() {
+
+        file = new File(BlazeyRedStonePvP.getPlugin().getDataFolder(), "data.yml");
+
+        if (!file.exists()) {
+            BlazeyRedStonePvP.getPlugin().saveResource("data.yml", false);
+        }
+
+        config = new YamlConfiguration();
+        config.options().parseComments(true);
+
+        try {
+            config.load(file);
+        } catch (Exception ex) {
+
+        }
+
+    }
+
+    public void save() {
+
+        try {
+            config.save(file);
+        }catch (Exception ex) {
+
+        }
+
+    }
+
+    public static DataConfig getInstance() {
+        return instance;
+    }
+}
