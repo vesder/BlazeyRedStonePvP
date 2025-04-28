@@ -32,4 +32,3 @@ HitRewards:
     drop: "REDSTONE"
     amount: 2
     permission: "group.witch"
-Converters:
