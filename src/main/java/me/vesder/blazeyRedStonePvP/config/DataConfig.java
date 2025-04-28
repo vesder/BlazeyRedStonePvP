@@ -4,6 +4,7 @@ import me.vesder.blazeyRedStonePvP.BlazeyRedStonePvP;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
+import java.util.List;
 
 public class DataConfig {
 
@@ -39,10 +40,21 @@ public class DataConfig {
 
         try {
             config.save(file);
-        }catch (Exception ex) {
+        } catch (Exception ex) {
 
         }
 
+    }
+
+    public void set(String path, Object value) {
+        config.set(path, value);
+
+        save();
+    }
+
+    public List<String> getStringListData(String path) {
+
+        return config.getStringList(path);
     }
 
     public static DataConfig getInstance() {
