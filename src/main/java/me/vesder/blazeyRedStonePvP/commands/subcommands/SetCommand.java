@@ -42,12 +42,12 @@ public class SetCommand extends SubCommand {
     @Override
     public void perform(Player player, String[] args) {
 
-        if (args.length == 1 || !args[1].matches(String.join("|",arguments))) {
+        if (args.length == 1 || !args[1].matches(String.join("|", arguments))) {
 
             player.sendMessage(color(
-                            "<gradient:#F3904F:#CB2D3E>Available gadgets : \n" +
-                            String.join(", ",arguments) +
-                                    "\n" + getSyntax() + "</gradient>"
+                    "<gradient:#F3904F:#CB2D3E>Available gadgets : \n" +
+                            String.join(", ", arguments) +
+                            "\n" + getSyntax() + "</gradient>"
             ));
 
             return;
@@ -68,13 +68,28 @@ public class SetCommand extends SubCommand {
 
                 }
 
-                dataNewList.add(
-                        blockLoc.getWorld().getName() + "/" +
-                        blockLoc.getBlockX() + "/" +
-                        blockLoc.getBlockY() + "/" +
-                        blockLoc.getBlockZ() + "/" +
-                        frame.getItem().getType()
-                );
+
+                if (args.length == 3) {
+
+                    dataNewList.add(
+                            blockLoc.getWorld().getName() + "/" +
+                                    blockLoc.getBlockX() + "/" +
+                                    blockLoc.getBlockY() + "/" +
+                                    blockLoc.getBlockZ() + "/" +
+                                    frame.getItem().getType() + "/" +
+                                    Integer.parseInt(args[2])
+                    );
+
+                } else {
+                    dataNewList.add(
+                            blockLoc.getWorld().getName() + "/" +
+                                    blockLoc.getBlockX() + "/" +
+                                    blockLoc.getBlockY() + "/" +
+                                    blockLoc.getBlockZ() + "/" +
+                                    frame.getItem().getType() + "/" +
+                                    5
+                    );
+                }
 
             } else if (args[1].equalsIgnoreCase("RepairAnvil")) {
 
@@ -85,25 +100,25 @@ public class SetCommand extends SubCommand {
 
                 dataNewList.add(
                         blockLoc.getWorld().getName() + "/" +
-                        blockLoc.getBlockX() + "/" +
-                        blockLoc.getBlockY() + "/" +
-                        blockLoc.getBlockZ()
+                                blockLoc.getBlockX() + "/" +
+                                blockLoc.getBlockY() + "/" +
+                                blockLoc.getBlockZ()
                 );
 
             } else {
 
                 dataNewList.add(
                         blockLoc.getWorld().getName() + "/" +
-                        blockLoc.getBlockX() + "/" +
-                        blockLoc.getBlockY() + "/" +
-                        blockLoc.getBlockZ()
+                                blockLoc.getBlockX() + "/" +
+                                blockLoc.getBlockY() + "/" +
+                                blockLoc.getBlockZ()
                 );
             }
 
-            DataConfig.getInstance().set(args[1],dataNewList);
+            DataConfig.getInstance().set(args[1], dataNewList);
             player.sendMessage(MessageUtils.gadgetSet(args[1]));
 
-        }catch (NullPointerException ex) {
+        } catch (NullPointerException ex) {
             player.sendMessage(MessageUtils.blockNotFound());
         }
 
@@ -115,6 +130,11 @@ public class SetCommand extends SubCommand {
         if (args.length == 2) {
 
             return arguments;
+        }
+
+        if (args.length == 3 && args[1].equalsIgnoreCase("Frame")) {
+
+            return List.of("5");
         }
 
         return List.of();
