@@ -13,11 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static me.vesder.blazeyRedStonePvP.utils.TextUtils.color;
-
 public class SetCommand extends SubCommand {
-    // Location Tekrari
-    // Message Help
 
     List<String> arguments = List.of(
 
@@ -48,11 +44,7 @@ public class SetCommand extends SubCommand {
 
         if (args.length == 1 || !args[1].matches(String.join("|", arguments))) {
 
-            player.sendMessage(color(
-                    "<gradient:#F3904F:#CB2D3E>Available gadgets : \n" +
-                            String.join(", ", arguments) +
-                            "\n" + getSyntax() + "</gradient>"
-            ));
+            player.sendMessage(MessageUtils.subCmdHelpMsg(getSyntax(), arguments));
 
             return;
         }
