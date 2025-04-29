@@ -10,10 +10,10 @@ public class MessageUtils {
 
     private static final String prefix = "<#59FFD0>BRS > <reset>";
 
-    public static String onlyPlayerMsg() {
-
-        return "Only players can use this command";
-    }
+//    public static String onlyPlayerMsg() {
+//
+//        return "Only players can use this command";
+//    }
 
     public static void sendBlockNotFoundMsg(Player player) {
 
