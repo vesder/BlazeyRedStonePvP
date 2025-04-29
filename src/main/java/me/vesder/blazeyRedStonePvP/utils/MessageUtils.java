@@ -20,17 +20,17 @@ public class MessageUtils {
         player.sendMessage(color(prefix + "<gradient:#F3904F:#CB2D3E>Block Mord Nazar Yaft Nashod</gradient>"));
     }
 
-    public static void sendGadgetSetMsg(Player player,String gadgetName) {
+    public static void sendGadgetSetMsg(Player player, String gadgetName) {
 
         player.sendMessage(color(prefix + "<gradient:#FFE259:#FFA751>" + gadgetName + " Ba Movafaghit Set Shod !</gradient>"));
     }
 
-    public static void sendGadgetAlreadySetMsg(Player player,String gadgetName) {
+    public static void sendGadgetAlreadySetMsg(Player player, String gadgetName) {
 
         player.sendMessage(color(prefix + "<gradient:#F3904F:#CB2D3E>Darhal Hazer " + gadgetName + " Roy In Block Set Shode !</gradient>"));
     }
 
-    public static void sendSubCmdHelpMsg(Player player,String syntax, List<String> arguments) {
+    public static void sendSubCmdHelpMsg(Player player, String syntax, List<String> arguments) {
 
         player.sendMessage(color(prefix + "<gradient:#F3904F:#CB2D3E>" + syntax + "\nAvailable SubCommands : " + String.join(", ", arguments) + "</gradient>"));
     }
