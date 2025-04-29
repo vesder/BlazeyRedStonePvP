@@ -96,7 +96,9 @@ public class SetCommand extends SubCommand {
 
             } else if (args[1].equalsIgnoreCase("RepairAnvil")) {
 
-                if (Objects.requireNonNull(player.getTargetBlockExact(5)).getType() != Material.ANVIL) {
+                Material blockType = Objects.requireNonNull(player.getTargetBlockExact(5)).getType();
+
+                if (blockType != Material.ANVIL && blockType != Material.CHIPPED_ANVIL && blockType != Material.DAMAGED_ANVIL) {
                     player.sendMessage(MessageUtils.blockNotFound());
                     return;
                 }
