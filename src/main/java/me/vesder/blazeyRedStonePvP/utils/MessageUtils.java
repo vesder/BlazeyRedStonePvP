@@ -1,6 +1,6 @@
 package me.vesder.blazeyRedStonePvP.utils;
 
-import net.kyori.adventure.text.Component;
+import org.bukkit.entity.Player;
 
 import java.util.List;
 
@@ -15,24 +15,24 @@ public class MessageUtils {
         return "Only players can use this command";
     }
 
-    public static Component blockNotFoundMsg() {
+    public static void sendBlockNotFoundMsg(Player player) {
 
-        return color(prefix + "<gradient:#F3904F:#CB2D3E>Block Mord Nazar Yaft Nashod</gradient>");
+        player.sendMessage(color(prefix + "<gradient:#F3904F:#CB2D3E>Block Mord Nazar Yaft Nashod</gradient>"));
     }
 
-    public static Component gadgetSetMsg(String gadgetName) {
+    public static void sendGadgetSetMsg(Player player,String gadgetName) {
 
-        return color(prefix + "<gradient:#FFE259:#FFA751>" + gadgetName + " Ba Movafaghit Set Shod !</gradient>");
+        player.sendMessage(color(prefix + "<gradient:#FFE259:#FFA751>" + gadgetName + " Ba Movafaghit Set Shod !</gradient>"));
     }
 
-    public static Component gadgetAlreadySetMsg(String gadgetName) {
+    public static void sendGadgetAlreadySetMsg(Player player,String gadgetName) {
 
-        return color(prefix + "<gradient:#F3904F:#CB2D3E>Darhal Hazer " + gadgetName + " Roy In Block Set Shode !</gradient>");
+        player.sendMessage(color(prefix + "<gradient:#F3904F:#CB2D3E>Darhal Hazer " + gadgetName + " Roy In Block Set Shode !</gradient>"));
     }
 
-    public static Component subCmdHelpMsg(String syntax, List<String> arguments) {
+    public static void sendSubCmdHelpMsg(Player player,String syntax, List<String> arguments) {
 
-        return color(prefix + "<gradient:#F3904F:#CB2D3E>" + syntax + "\nAvailable SubCommands : " + String.join(", ", arguments) + "</gradient>");
+        player.sendMessage(color(prefix + "<gradient:#F3904F:#CB2D3E>" + syntax + "\nAvailable SubCommands : " + String.join(", ", arguments) + "</gradient>"));
     }
 
 }

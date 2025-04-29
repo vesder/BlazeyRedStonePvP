@@ -2,7 +2,6 @@ package me.vesder.blazeyRedStonePvP.commands.subcommands;
 
 import me.vesder.blazeyRedStonePvP.commands.SubCommand;
 import me.vesder.blazeyRedStonePvP.config.DataConfig;
-import me.vesder.blazeyRedStonePvP.utils.MessageUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -12,6 +11,8 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import static me.vesder.blazeyRedStonePvP.utils.MessageUtils.*;
 
 public class SetCommand extends SubCommand {
 
@@ -44,7 +45,7 @@ public class SetCommand extends SubCommand {
 
         if (args.length == 1 || !args[1].matches(String.join("|", arguments))) {
 
-            player.sendMessage(MessageUtils.subCmdHelpMsg(getSyntax(), arguments));
+            sendSubCmdHelpMsg(player, getSyntax(), arguments);
 
             return;
         }
@@ -69,7 +70,7 @@ public class SetCommand extends SubCommand {
                     );
 
                     if (setLoc.equals(blockLoc)) {
-                        player.sendMessage(MessageUtils.gadgetAlreadySetMsg(gadget));
+                        sendGadgetAlreadySetMsg(player, gadget);
                         return;
                     }
 
@@ -81,7 +82,7 @@ public class SetCommand extends SubCommand {
 
                 if (!(player.getTargetEntity(5) instanceof ItemFrame frame)) {
 
-                    player.sendMessage(MessageUtils.blockNotFoundMsg());
+                    sendBlockNotFoundMsg(player);
                     return;
 
                 }
@@ -116,7 +117,7 @@ public class SetCommand extends SubCommand {
                 Material blockType = Objects.requireNonNull(player.getTargetBlockExact(5)).getType();
 
                 if (blockType != Material.ANVIL && blockType != Material.CHIPPED_ANVIL && blockType != Material.DAMAGED_ANVIL) {
-                    player.sendMessage(MessageUtils.blockNotFoundMsg());
+                    sendBlockNotFoundMsg(player);
                     return;
                 }
 
@@ -138,10 +139,10 @@ public class SetCommand extends SubCommand {
             }
 
             DataConfig.getInstance().set(args[1], dataNewList);
-            player.sendMessage(MessageUtils.gadgetSetMsg(args[1]));
+            sendGadgetSetMsg(player, args[1]);
 
         } catch (NullPointerException ex) {
-            player.sendMessage(MessageUtils.blockNotFoundMsg());
+            sendBlockNotFoundMsg(player);
         }
 
     }
