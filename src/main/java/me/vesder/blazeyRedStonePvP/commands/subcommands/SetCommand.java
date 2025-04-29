@@ -12,7 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static me.vesder.blazeyRedStonePvP.utils.MessageUtils.*;
+import static me.vesder.blazeyRedStonePvP.utils.MessageUtils.sendSubCmdHelpMsg;
+import static me.vesder.blazeyRedStonePvP.utils.MessageUtils.sendGadgetAlreadySetMsg;
+import static me.vesder.blazeyRedStonePvP.utils.MessageUtils.sendGadgetSetMsg;
+import static me.vesder.blazeyRedStonePvP.utils.MessageUtils.sendBlockNotFoundMsg;
 
 public class SetCommand extends SubCommand {
 
