@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static me.vesder.blazeyRedStonePvP.utils.TextUtils.color;
 
@@ -57,7 +58,7 @@ public class SetCommand extends SubCommand {
 
             List<String> dataNewList = new ArrayList<>(DataConfig.getInstance().getStringListData(args[1]));
 
-            Location blockLoc = player.getTargetBlockExact(5).getLocation();
+            Location blockLoc = Objects.requireNonNull(player.getTargetBlockExact(5)).getLocation();
 
             if (args[1].equalsIgnoreCase("Frame")) {
 
@@ -95,7 +96,7 @@ public class SetCommand extends SubCommand {
 
             } else if (args[1].equalsIgnoreCase("RepairAnvil")) {
 
-                if (player.getTargetBlockExact(5).getType() != Material.ANVIL) {
+                if (Objects.requireNonNull(player.getTargetBlockExact(5)).getType() != Material.ANVIL) {
                     player.sendMessage(MessageUtils.blockNotFound());
                     return;
                 }
