@@ -69,7 +69,7 @@ public class SetCommand extends SubCommand {
                 }
 
 
-                if (args.length == 3) {
+                try {
 
                     dataNewList.add(
                             blockLoc.getWorld().getName() + "/" +
@@ -80,7 +80,8 @@ public class SetCommand extends SubCommand {
                                     Integer.parseInt(args[2])
                     );
 
-                } else {
+                } catch (Exception ex) {
+
                     dataNewList.add(
                             blockLoc.getWorld().getName() + "/" +
                                     blockLoc.getBlockX() + "/" +
@@ -89,6 +90,7 @@ public class SetCommand extends SubCommand {
                                     frame.getItem().getType() + "/" +
                                     5
                     );
+
                 }
 
             } else if (args[1].equalsIgnoreCase("RepairAnvil")) {
