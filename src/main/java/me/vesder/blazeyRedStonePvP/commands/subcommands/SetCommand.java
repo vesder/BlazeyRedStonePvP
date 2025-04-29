@@ -3,6 +3,7 @@ package me.vesder.blazeyRedStonePvP.commands.subcommands;
 import me.vesder.blazeyRedStonePvP.commands.SubCommand;
 import me.vesder.blazeyRedStonePvP.config.DataConfig;
 import me.vesder.blazeyRedStonePvP.utils.MessageUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.ItemFrame;
@@ -15,6 +16,8 @@ import java.util.Objects;
 import static me.vesder.blazeyRedStonePvP.utils.TextUtils.color;
 
 public class SetCommand extends SubCommand {
+    // Location Tekrari
+    // Message Help
 
     List<String> arguments = List.of(
 
@@ -60,11 +63,33 @@ public class SetCommand extends SubCommand {
 
             Location blockLoc = Objects.requireNonNull(player.getTargetBlockExact(5)).getLocation();
 
+            for (String gadget : arguments) {
+
+                for (String dataList : DataConfig.getInstance().getStringListData(gadget)) {
+
+                    String[] splitArray = dataList.split("/");
+
+                    Location setLoc = new Location(
+                            Bukkit.getWorld(splitArray[0]),
+                            Integer.parseInt(splitArray[1]),
+                            Integer.parseInt(splitArray[2]),
+                            Integer.parseInt(splitArray[3])
+                    );
+
+                    if (setLoc.equals(blockLoc)) {
+                        player.sendMessage(MessageUtils.gadgetAlreadySetMsg(gadget));
+                        return;
+                    }
+
+                }
+
+            }
+
             if (args[1].equalsIgnoreCase("Frame")) {
 
                 if (!(player.getTargetEntity(5) instanceof ItemFrame frame)) {
 
-                    player.sendMessage(MessageUtils.blockNotFound());
+                    player.sendMessage(MessageUtils.blockNotFoundMsg());
                     return;
 
                 }
@@ -99,7 +124,7 @@ public class SetCommand extends SubCommand {
                 Material blockType = Objects.requireNonNull(player.getTargetBlockExact(5)).getType();
 
                 if (blockType != Material.ANVIL && blockType != Material.CHIPPED_ANVIL && blockType != Material.DAMAGED_ANVIL) {
-                    player.sendMessage(MessageUtils.blockNotFound());
+                    player.sendMessage(MessageUtils.blockNotFoundMsg());
                     return;
                 }
 
@@ -121,10 +146,10 @@ public class SetCommand extends SubCommand {
             }
 
             DataConfig.getInstance().set(args[1], dataNewList);
-            player.sendMessage(MessageUtils.gadgetSet(args[1]));
+            player.sendMessage(MessageUtils.gadgetSetMsg(args[1]));
 
         } catch (NullPointerException ex) {
-            player.sendMessage(MessageUtils.blockNotFound());
+            player.sendMessage(MessageUtils.blockNotFoundMsg());
         }
 
     }
