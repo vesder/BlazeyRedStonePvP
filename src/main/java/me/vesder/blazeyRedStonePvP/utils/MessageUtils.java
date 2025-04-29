@@ -25,7 +25,7 @@ public class MessageUtils {
 
     public static Component gadgetAlreadySetMsg(String gadgetName) {
 
-        return color(prefix + "<gradient:#FFE259:#FFA751>Darhal Hazer" + gadgetName + " Roy In Block Set Shode Ast !</gradient>");
+        return color(prefix + "<gradient:#F3904F:#CB2D3E>Darhal Hazer " + gadgetName + " Roy In Block Set Shode !</gradient>");
     }
 
 }
