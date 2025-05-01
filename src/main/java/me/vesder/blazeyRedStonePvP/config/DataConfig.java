@@ -30,7 +30,7 @@ public class DataConfig {
 
         try {
             config.load(file);
-        } catch (Exception ex) {
+        } catch (Exception ignored) {
 
         }
 
@@ -40,7 +40,7 @@ public class DataConfig {
 
         try {
             config.save(file);
-        } catch (Exception ex) {
+        } catch (Exception ignored) {
 
         }
 
@@ -57,7 +57,7 @@ public class DataConfig {
         return config.getStringList(path);
     }
 
-    public static DataConfig getInstance() {
+    public static DataConfig getDataConfig() {
         return instance;
     }
 }

@@ -1,7 +1,6 @@
 package me.vesder.blazeyRedStonePvP.utils;
 
 import me.vesder.blazeyRedStonePvP.BlazeyRedStonePvP;
-import me.vesder.blazeyRedStonePvP.config.DataConfig;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
@@ -10,6 +9,8 @@ import org.bukkit.configuration.ConfigurationSection;
 
 import java.util.List;
 import java.util.Optional;
+
+import static me.vesder.blazeyRedStonePvP.config.DataConfig.getDataConfig;
 
 public class TextUtils {
 
@@ -57,7 +58,7 @@ public class TextUtils {
     public static Optional<String> checkGadgetAtLocation(Location locationToCheck, List<String> gadgetList) {
 
         for (String gadget : gadgetList) {
-            for (String locationEntry : DataConfig.getInstance().getStringListData(gadget)) {
+            for (String locationEntry : getDataConfig().getStringListData(gadget)) {
 
                 String[] splitArray = locationEntry.split("/");
 

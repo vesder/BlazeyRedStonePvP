@@ -1,7 +1,6 @@
 package me.vesder.blazeyRedStonePvP.commands.subcommands;
 
 import me.vesder.blazeyRedStonePvP.commands.SubCommand;
-import me.vesder.blazeyRedStonePvP.config.DataConfig;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.ItemFrame;
@@ -11,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static me.vesder.blazeyRedStonePvP.config.DataConfig.getDataConfig;
 import static me.vesder.blazeyRedStonePvP.utils.MessageUtils.sendSubCmdHelpMsg;
 import static me.vesder.blazeyRedStonePvP.utils.MessageUtils.sendGadgetAlreadySetMsg;
 import static me.vesder.blazeyRedStonePvP.utils.MessageUtils.sendGadgetSetMsg;
@@ -58,7 +58,7 @@ public class SetCommand extends SubCommand {
 
         try {
 
-            List<String> dataNewList = new ArrayList<>(DataConfig.getInstance().getStringListData(args[1]));
+            List<String> dataNewList = new ArrayList<>(getDataConfig().getStringListData(args[1]));
 
             Location blockLoc = Objects.requireNonNull(player.getTargetBlockExact(5)).getLocation();
 
@@ -125,7 +125,7 @@ public class SetCommand extends SubCommand {
                             );
                         }
 
-                        DataConfig.getInstance().set(args[1], dataNewList);
+                        getDataConfig().set(args[1], dataNewList);
                         sendGadgetSetMsg(player, args[1]);
                     });
 

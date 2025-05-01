@@ -1,12 +1,12 @@
 package me.vesder.blazeyRedStonePvP;
 
 import me.vesder.blazeyRedStonePvP.commands.CommandManager;
-import me.vesder.blazeyRedStonePvP.config.DataConfig;
 import me.vesder.blazeyRedStonePvP.listeners.InteractListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
 
+import static me.vesder.blazeyRedStonePvP.config.DataConfig.getDataConfig;
 import static me.vesder.blazeyRedStonePvP.utils.TextUtils.color;
 import static org.bukkit.Bukkit.getConsoleSender;
 import static org.bukkit.Bukkit.getPluginManager;
@@ -39,7 +39,7 @@ public final class BlazeyRedStonePvP extends JavaPlugin {
         Objects.requireNonNull(getCommand("rs")).setExecutor(new CommandManager());
 
         // Check if the config was just created (i.e. it didn't exist before)
-        DataConfig.getInstance().load();
+        getDataConfig().load();
 
         // Print a startup message in the server console
         getConsoleSender().sendMessage(color("<dark_purple>=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= ★"));
