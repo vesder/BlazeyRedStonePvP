@@ -2,7 +2,6 @@ package me.vesder.blazeyRedStonePvP.commands.subcommands;
 
 import me.vesder.blazeyRedStonePvP.commands.SubCommand;
 import me.vesder.blazeyRedStonePvP.config.DataConfig;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.ItemFrame;
@@ -16,6 +15,7 @@ import static me.vesder.blazeyRedStonePvP.utils.MessageUtils.sendSubCmdHelpMsg;
 import static me.vesder.blazeyRedStonePvP.utils.MessageUtils.sendGadgetAlreadySetMsg;
 import static me.vesder.blazeyRedStonePvP.utils.MessageUtils.sendGadgetSetMsg;
 import static me.vesder.blazeyRedStonePvP.utils.MessageUtils.sendBlockNotFoundMsg;
+import static me.vesder.blazeyRedStonePvP.utils.TextUtils.checkGadgetAtLocation;
 
 public class SetCommand extends SubCommand {
 
@@ -63,90 +63,73 @@ public class SetCommand extends SubCommand {
 
             Location blockLoc = Objects.requireNonNull(player.getTargetBlockExact(5)).getLocation();
 
-            for (String gadget : arguments) {
+            checkGadgetAtLocation(blockLoc, arguments).ifPresentOrElse(
+                    gadget -> sendGadgetAlreadySetMsg(player, gadget),
+                    () -> {
 
-                for (String dataList : DataConfig.getInstance().getStringListData(gadget)) {
+                        if (args[1].equalsIgnoreCase("Frame")) {
 
-                    String[] splitArray = dataList.split("/");
+                            if (!(player.getTargetEntity(5) instanceof ItemFrame frame)) {
 
-                    Location setLoc = new Location(
-                            Bukkit.getWorld(splitArray[0]),
-                            Integer.parseInt(splitArray[1]),
-                            Integer.parseInt(splitArray[2]),
-                            Integer.parseInt(splitArray[3])
-                    );
+                                sendBlockNotFoundMsg(player);
+                                return;
 
-                    if (setLoc.equals(blockLoc)) {
-                        sendGadgetAlreadySetMsg(player, gadget);
-                        return;
-                    }
-
-                }
-
-            }
-
-            if (args[1].equalsIgnoreCase("Frame")) {
-
-                if (!(player.getTargetEntity(5) instanceof ItemFrame frame)) {
-
-                    sendBlockNotFoundMsg(player);
-                    return;
-
-                }
+                            }
 
 
-                try {
+                            try {
 
-                    dataNewList.add(
-                            blockLoc.getWorld().getName() + "/" +
-                                    blockLoc.getBlockX() + "/" +
-                                    blockLoc.getBlockY() + "/" +
-                                    blockLoc.getBlockZ() + "/" +
-                                    frame.getItem().getType() + "/" +
-                                    Integer.parseInt(args[2])
-                    );
+                                dataNewList.add(
+                                        blockLoc.getWorld().getName() + "/" +
+                                                blockLoc.getBlockX() + "/" +
+                                                blockLoc.getBlockY() + "/" +
+                                                blockLoc.getBlockZ() + "/" +
+                                                frame.getItem().getType() + "/" +
+                                                Integer.parseInt(args[2])
+                                );
 
-                } catch (Exception ex) {
+                            } catch (Exception ex) {
 
-                    dataNewList.add(
-                            blockLoc.getWorld().getName() + "/" +
-                                    blockLoc.getBlockX() + "/" +
-                                    blockLoc.getBlockY() + "/" +
-                                    blockLoc.getBlockZ() + "/" +
-                                    frame.getItem().getType() + "/" +
-                                    5
-                    );
+                                dataNewList.add(
+                                        blockLoc.getWorld().getName() + "/" +
+                                                blockLoc.getBlockX() + "/" +
+                                                blockLoc.getBlockY() + "/" +
+                                                blockLoc.getBlockZ() + "/" +
+                                                frame.getItem().getType() + "/" +
+                                                5
+                                );
 
-                }
+                            }
 
-            } else if (args[1].equalsIgnoreCase("RepairAnvil")) {
+                        } else if (args[1].equalsIgnoreCase("RepairAnvil")) {
 
-                Material blockType = Objects.requireNonNull(player.getTargetBlockExact(5)).getType();
+                            Material blockType = Objects.requireNonNull(player.getTargetBlockExact(5)).getType();
 
-                if (blockType != Material.ANVIL && blockType != Material.CHIPPED_ANVIL && blockType != Material.DAMAGED_ANVIL) {
-                    sendBlockNotFoundMsg(player);
-                    return;
-                }
+                            if (blockType != Material.ANVIL && blockType != Material.CHIPPED_ANVIL && blockType != Material.DAMAGED_ANVIL) {
+                                sendBlockNotFoundMsg(player);
+                                return;
+                            }
 
-                dataNewList.add(
-                        blockLoc.getWorld().getName() + "/" +
-                                blockLoc.getBlockX() + "/" +
-                                blockLoc.getBlockY() + "/" +
-                                blockLoc.getBlockZ()
-                );
+                            dataNewList.add(
+                                    blockLoc.getWorld().getName() + "/" +
+                                            blockLoc.getBlockX() + "/" +
+                                            blockLoc.getBlockY() + "/" +
+                                            blockLoc.getBlockZ()
+                            );
 
-            } else {
+                        } else {
 
-                dataNewList.add(
-                        blockLoc.getWorld().getName() + "/" +
-                                blockLoc.getBlockX() + "/" +
-                                blockLoc.getBlockY() + "/" +
-                                blockLoc.getBlockZ()
-                );
-            }
+                            dataNewList.add(
+                                    blockLoc.getWorld().getName() + "/" +
+                                            blockLoc.getBlockX() + "/" +
+                                            blockLoc.getBlockY() + "/" +
+                                            blockLoc.getBlockZ()
+                            );
+                        }
 
-            DataConfig.getInstance().set(args[1], dataNewList);
-            sendGadgetSetMsg(player, args[1]);
+                        DataConfig.getInstance().set(args[1], dataNewList);
+                        sendGadgetSetMsg(player, args[1]);
+                    });
 
         } catch (NullPointerException ex) {
             sendBlockNotFoundMsg(player);
