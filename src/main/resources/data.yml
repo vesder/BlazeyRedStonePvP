@@ -1,11 +1,5 @@
-Converters:
-  RedstoneConverter:
-#    - "world/0/0/0"
-  GoldConverter:
-#    - "world/0/0/0"
-  EmeraldConverter:
-#    - "world/0/0/0"
+RedstoneConverter:
+GoldConverter:
+EmeraldConverter:
 RepairAnvil:
-#  - "world/0/0/0"
 Frame:
-#  - "world/0/0/0/IRON_SWORD"
