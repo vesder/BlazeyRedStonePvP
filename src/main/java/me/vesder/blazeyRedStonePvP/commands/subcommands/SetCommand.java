@@ -19,7 +19,7 @@ import static me.vesder.blazeyRedStonePvP.utils.MessageUtils.sendBlockNotFoundMs
 
 public class SetCommand extends SubCommand {
 
-    List<String> arguments = List.of(
+    private static final List<String> arguments = List.of(
 
             "RedstoneConverter",
             "GoldConverter",
@@ -27,6 +27,10 @@ public class SetCommand extends SubCommand {
             "RepairAnvil",
             "Frame"
     );
+
+    public static List<String> getSetCmdArgs() {
+        return arguments;
+    }
 
     @Override
     public String getName() {
