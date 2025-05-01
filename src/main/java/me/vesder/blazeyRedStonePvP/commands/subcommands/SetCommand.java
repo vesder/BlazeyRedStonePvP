@@ -53,7 +53,6 @@ public class SetCommand extends SubCommand {
         if (args.length == 1 || !args[1].matches(String.join("|", arguments))) {
 
             sendSubCmdHelpMsg(player, getSyntax(), arguments);
-
             return;
         }
 
@@ -73,7 +72,6 @@ public class SetCommand extends SubCommand {
 
                                 sendBlockNotFoundMsg(player);
                                 return;
-
                             }
 
 
