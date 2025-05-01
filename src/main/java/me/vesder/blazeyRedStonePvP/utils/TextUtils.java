@@ -1,11 +1,15 @@
 package me.vesder.blazeyRedStonePvP.utils;
 
 import me.vesder.blazeyRedStonePvP.BlazeyRedStonePvP;
+import me.vesder.blazeyRedStonePvP.config.DataConfig;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 
 import java.util.List;
+import java.util.Optional;
 
 public class TextUtils {
 
@@ -39,4 +43,38 @@ public class TextUtils {
 
     }
 
+    public static ConfigurationSection getMatFromConfig(String path) {
+
+        return BlazeyRedStonePvP.getPlugin().getConfig().getConfigurationSection(path);
+
+    }
+
+    public void playSoundFromString() {
+
+    }
+
+
+    public static Optional<String> checkGadgetAtLocation(Location locationToCheck, List<String> gadgetList) {
+
+        for (String gadget : gadgetList) {
+            for (String locationEntry : DataConfig.getInstance().getStringListData(gadget)) {
+
+                String[] splitArray = locationEntry.split("/");
+
+                Location gadgetLocation = new Location(
+                        Bukkit.getWorld(splitArray[0]),
+                        Integer.parseInt(splitArray[1]),
+                        Integer.parseInt(splitArray[2]),
+                        Integer.parseInt(splitArray[3])
+                );
+
+                if (gadgetLocation.equals(locationToCheck)) {
+                    return Optional.of(gadget);
+                }
+
+            }
+        }
+
+        return Optional.empty();
+    }
 }
