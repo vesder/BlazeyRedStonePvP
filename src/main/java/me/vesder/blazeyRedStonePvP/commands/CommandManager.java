@@ -15,7 +15,7 @@ import static me.vesder.blazeyRedStonePvP.utils.TextUtils.color;
 
 public class CommandManager implements TabExecutor {
 
-    private ArrayList<SubCommand> subCommands = new ArrayList<>();
+    private final ArrayList<SubCommand> subCommands = new ArrayList<>();
 
     public CommandManager() {
         subCommands.add(new SetCommand());
