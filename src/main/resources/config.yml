@@ -3,6 +3,21 @@ Radio:
     - ""
   permisison: ""
 CustomPotions:
+Gadgets:
+  RedstoneConverter:
+    take: ""
+    amount: 2
+    give: ""
+  GoldConverter:
+    take: ""
+    amount: 2
+    give: ""
+  EmeraldConverter:
+    take: ""
+    amount: 2
+    give: ""
+  RepairAnvil:
+  Frame:
 HitRewards:
   Mythical:
     drop: "REDSTONE"
