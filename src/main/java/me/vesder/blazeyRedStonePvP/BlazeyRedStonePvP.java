@@ -2,12 +2,14 @@ package me.vesder.blazeyRedStonePvP;
 
 import me.vesder.blazeyRedStonePvP.commands.CommandManager;
 import me.vesder.blazeyRedStonePvP.config.DataConfig;
+import me.vesder.blazeyRedStonePvP.listeners.InteractListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
 
 import static me.vesder.blazeyRedStonePvP.utils.TextUtils.color;
 import static org.bukkit.Bukkit.getConsoleSender;
+import static org.bukkit.Bukkit.getPluginManager;
 
 public final class BlazeyRedStonePvP extends JavaPlugin {
 
@@ -31,9 +33,7 @@ public final class BlazeyRedStonePvP extends JavaPlugin {
 //        damageListener.startCombatLogTask(); // Start the periodic update task for BossBars
 
         // Register events (Listeners) for various classes
-//        getPluginManager().registerEvents(damageListener, this);
-//        getPluginManager().registerEvents(new InteractListener(), this);
-//        getPluginManager().registerEvents(new TaxSystem(), this);
+        getPluginManager().registerEvents(new InteractListener(), this);
 
         // Register commands
         Objects.requireNonNull(getCommand("rs")).setExecutor(new CommandManager());
