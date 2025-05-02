@@ -5,7 +5,9 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.Player;
 
 import java.util.List;
 import java.util.Optional;
@@ -50,8 +52,13 @@ public class TextUtils {
 
     }
 
-    public void playSoundFromString() {
+    public static void playSoundFromString(Player player, String sound) {
 
+        if (sound.isEmpty()) {
+            return;
+        }
+
+        player.playSound(player.getLocation(), Sound.valueOf(sound.toUpperCase()), 1.0f, 1.0f);
     }
 
 
