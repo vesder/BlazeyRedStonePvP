@@ -35,4 +35,9 @@ public class MessageUtils {
         player.sendMessage(color(prefix + "<gradient:#F3904F:#CB2D3E>" + syntax + "\nAvailable SubCommands : " + String.join(", ", arguments) + "</gradient>"));
     }
 
+    public static void sendInvFullMsg(Player player) {
+
+        player.sendMessage(color(prefix + "<gradient:#F3904F:#CB2D3E>INV FULL</gradient>"));
+    }
+
 }
