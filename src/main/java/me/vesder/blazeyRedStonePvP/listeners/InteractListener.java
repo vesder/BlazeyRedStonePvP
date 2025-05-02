@@ -1,7 +1,6 @@
 package me.vesder.blazeyRedStonePvP.listeners;
 
 import me.vesder.blazeyRedStonePvP.commands.subcommands.SetCommand;
-import me.vesder.blazeyRedStonePvP.utils.TextUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static me.vesder.blazeyRedStonePvP.utils.TextUtils.getIntConfig;
-import static me.vesder.blazeyRedStonePvP.utils.TextUtils.getStringConfig;
+import static me.vesder.blazeyRedStonePvP.utils.MessageUtils.sendInvFullMsg;
+import static me.vesder.blazeyRedStonePvP.utils.TextUtils.*;
 
 public class InteractListener implements Listener {
 
@@ -30,43 +29,43 @@ public class InteractListener implements Listener {
     @EventHandler
     private void onInteract(PlayerInteractEvent event) {
 
-        if (event.getHand() != EquipmentSlot.HAND) {
+        if (event.getHand() != EquipmentSlot.HAND || event.getAction() != Action.RIGHT_CLICK_BLOCK) {
             return;
         }
 
-        if (event.getAction() != Action.RIGHT_CLICK_BLOCK) {
-            return;
-        }
+        checkGadgetAtLocation(Objects.requireNonNull(event.getClickedBlock()).getLocation(), gadgets)
+                .ifPresent(gadget -> {
 
-        TextUtils.checkGadgetAtLocation(Objects.requireNonNull(event.getClickedBlock()).getLocation(), gadgets).ifPresent(gadget -> {
+                    Player player = event.getPlayer();
+                    event.setCancelled(true);
 
-            Player player = event.getPlayer();
-            event.setCancelled(true);
+                    if (gadget.equals("RepairAnvil")) {
 
-            if (gadget.equals("RepairAnvil")) {
+                        player.sendMessage("Anvil");
 
-                player.sendMessage("Anvil");
+                        return;
+                    }
 
-                return;
-            }
+                    int takeAmount = getIntConfig("Gadgets." + gadget + ".amount");
+                    Material takeMat = Material.matchMaterial(getStringConfig("Gadgets." + gadget + ".take"));
+                    ItemStack giveItem = new ItemStack(Objects.requireNonNull(Material.matchMaterial(getStringConfig("Gadgets." + gadget + ".give"))));
 
-            int takeAmount = getIntConfig("Gadgets." + gadget + ".amount");
-            Material takeMat = Material.matchMaterial(getStringConfig("Gadgets." + gadget + ".take"));
-            ItemStack giveItem = new ItemStack(Objects.requireNonNull(Material.matchMaterial(getStringConfig("Gadgets." + gadget + ".give"))));
+                    if (!player.getInventory().contains(Objects.requireNonNull(takeMat), takeAmount)) {
 
-            if (!player.getInventory().contains(Objects.requireNonNull(takeMat), takeAmount)) {
+                        player.sendMessage(color(getStringConfig("Gadgets." + gadget + ".message")));
+                        return;
+                    }
 
-                return;
-            }
+                    if (player.getInventory().firstEmpty() == -1) {
+                        sendInvFullMsg(player);
+                        return;
+                    }
 
-            // Check if the player's inventory has space, if not drop the item near the player
-            if (player.getInventory().firstEmpty() == -1) {
-                player.getLocation().getWorld().dropItemNaturally(player.getLocation(), giveItem); // Drop item at the killer's location
-            } else {
-                player.getInventory().addItem(giveItem); // Add the item to the killer's inventory
-            }
+                    player.getInventory().removeItem(new ItemStack(takeMat, takeAmount));
+                    player.getInventory().addItem(giveItem);
+                    playSoundFromString(player, getStringConfig("Gadgets." + gadget + ".sound"));
 
-        });
+                });
 
     }
 
