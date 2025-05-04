@@ -9,7 +9,7 @@ Gadgets:
     amount: 2
     give: "REDSTONE"
     sound: "BLOCK_NOTE_BLOCK_HAT"
-    message: "&2ℹ &nBPG&7 » &7برای تبدیل زغال به رد استون شما به&c %amount% &7عدد زغال نیاز دارید"
+    message: "<dark_green>ℹ <u>BPG</u></dark_green> <gray>»</gray> <gray>برای تبدیل زغال به رد استون شما به</gray><red> <amount></red><gray> عدد زغال نیاز دارید</gray>"
   GoldConverter:
     take: "REDSTONE"
     amount: 16
