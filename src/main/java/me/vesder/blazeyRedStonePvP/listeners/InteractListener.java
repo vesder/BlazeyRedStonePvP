@@ -52,7 +52,7 @@ public class InteractListener implements Listener {
 
                     if (!player.getInventory().contains(Objects.requireNonNull(takeMat), takeAmount)) {
 
-                        player.sendMessage(color(getStringConfig("Gadgets." + gadget + ".message")));
+                        player.sendMessage(color(getStringConfig("Gadgets." + gadget + ".message"),"amount",takeAmount));
                         return;
                     }
 
