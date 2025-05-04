@@ -8,19 +8,19 @@ Gadgets:
     take: "COAL"
     amount: 2
     give: "REDSTONE"
-    sound: "NOTE_STICKS"
+    sound: "BLOCK_NOTE_BLOCK_HAT"
     message: "&2ℹ &nBPG&7 » &7برای تبدیل زغال به رد استون شما به&c %amount% &7عدد زغال نیاز دارید"
   GoldConverter:
     take: "REDSTONE"
     amount: 16
     give: "GOLD_INGOT"
-    sound: "NOTE_PIANO"
+    sound: "BLOCK_NOTE_BLOCK_HARP"
     message: "&2ℹ &nBPG&7 » &7برای تبدیل رد استون به طلا شما به&c %amount%&7 عدد رد استون نیاز دارید"
   EmeraldConverter:
     take: "GOLD_INGOT"
     amount: 8
     give: "EMERALD"
-    sound: "NOTE_PLING"
+    sound: "BLOCK_NOTE_BLOCK_PLING"
     message: "&2ℹ &nBPG&7 » &7برای تبدیل طلا به امرالد شما به&c %amount%&7 عدد طلا نیاز دارید"
   RepairAnvil:
   Frame:
