@@ -3,6 +3,7 @@ package me.vesder.blazeyRedStonePvP.utils;
 import me.vesder.blazeyRedStonePvP.BlazeyRedStonePvP;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Sound;
@@ -20,6 +21,11 @@ public class TextUtils {
 
         return MiniMessage.miniMessage().deserialize(string);
 
+    }
+
+    public static Component color(String string, String placeholder, Object replace) {
+
+        return MiniMessage.miniMessage().deserialize(string, Placeholder.parsed(placeholder, String.valueOf(replace)));
     }
 
     public static String getStringConfig(String path) {
