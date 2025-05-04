@@ -21,7 +21,7 @@ Gadgets:
     amount: 8
     give: "EMERALD"
     sound: "BLOCK_NOTE_BLOCK_PLING"
-    message: "&2ℹ &nBPG&7 » &7برای تبدیل طلا به امرالد شما به&c %amount%&7 عدد طلا نیاز دارید"
+    message: "<dark_green>ℹ <u>BPG</u></dark_green> <gray>»</gray> <gray>برای تبدیل طلا به امرالد شما به</gray> <red>%amount%</red> <gray>عدد طلا نیاز دارید</gray>"
   RepairAnvil:
   Frame:
 HitRewards:
