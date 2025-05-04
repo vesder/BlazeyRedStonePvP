@@ -20,7 +20,6 @@ public class TextUtils {
     public static Component color(String string) {
 
         return MiniMessage.miniMessage().deserialize(string);
-
     }
 
     public static Component color(String string, String placeholder, Object replace) {
