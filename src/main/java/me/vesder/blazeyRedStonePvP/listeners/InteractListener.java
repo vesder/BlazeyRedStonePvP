@@ -1,7 +1,10 @@
 package me.vesder.blazeyRedStonePvP.listeners;
 
 import me.vesder.blazeyRedStonePvP.commands.subcommands.SetCommand;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Particle;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -9,6 +12,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +37,8 @@ public class InteractListener implements Listener {
             return;
         }
 
-        checkGadgetAtLocation(Objects.requireNonNull(event.getClickedBlock()).getLocation(), gadgets)
+        Location clickedLocation = Objects.requireNonNull(event.getClickedBlock()).getLocation();
+        checkGadgetAtLocation(clickedLocation, gadgets)
                 .ifPresent(gadget -> {
 
                     Player player = event.getPlayer();
@@ -41,7 +46,21 @@ public class InteractListener implements Listener {
 
                     if (gadget.equals("RepairAnvil")) {
 
-                        player.sendMessage("Anvil");
+                        Location centerLocation = clickedLocation.clone().add(0.50, 1, 0.50);
+
+                        Item droppedItem = event.getClickedBlock().getWorld()
+                                .dropItem(centerLocation, player.getInventory().getItemInMainHand());
+
+                        droppedItem.setPickupDelay(Integer.MAX_VALUE);
+                        droppedItem.setVelocity(new Vector(0, 0, 0));
+
+                        spawnParticles(player.getWorld(), Particle.BLOCK_CRACK, List.of(
+
+                                centerLocation,
+                                clickedLocation.clone().add(0.75, 1, 0.25),
+                                clickedLocation.clone().add(0.25, 1, 0.75)
+
+                        ), Material.ANVIL.createBlockData());
 
                         return;
                     }
