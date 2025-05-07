@@ -23,6 +23,43 @@ Gadgets:
     sound: "BLOCK_NOTE_BLOCK_PLING"
     message: "<dark_green>ℹ <u>BPG</u></dark_green> <gray>»</gray> <gray>برای تبدیل طلا به امرالد شما به</gray><red> <amount></red><gray> عدد طلا نیاز دارید</gray>"
   RepairAnvil:
+    Start:
+      sound: "DOOR_CLOSE"
+      message: "&2ℹ &nBPG&7 » &a&oدرحال تعمیر...."
+    End:
+      sound: ""
+      message: "&2ℹ &nBPG&7 » &aوسیله ای شما با موفقیت تعمیر شد"
+    Errors:
+      empty: "&2ℹ &nBPG&7 » &cشما نمیتوانید دست خود را تعمیر کنید!"
+      already: "&2ℹ &nBPG&7 » &cوسیله شما نیاز به تعمیر ندارد!"
+      cant: "&2ℹ &nBPG&7 » &cشما نمیتوانید این وسیله را تعمیر کنید"
+      money: "&2ℹ &nBPG&7 » &cشما برای تعمیر نیاز به 3 طلا دارید."
+    take: "GOLD_INGOT"
+    amount: 3
+    sound: "ANVIL_USE"
+    repairableItems:
+      - DIAMOND_SWORD
+      - IRON_SWORD
+      - GOLD_SWORD
+      - WOODEN_SWORD
+      - STONE_SWORD
+      - DIAMOND_AXE
+      - DIAMOND_PICKAXE
+      - IRON_AXE
+      - STONE_AXE
+      - BOW
+      - DIAMOND_HELMET
+      - DIAMOND_CHESTPLATE
+      - DIAMOND_LEGGINGS
+      - DIAMOND_BOOTS
+      - IRON_HELMET
+      - IRON_CHESTPLATE
+      - IRON_LEGGINGS
+      - IRON_BOOTS
+      - NETHERITE_HELMET
+      - NETHERITE_CHESTPLATE
+      - NETHERITE_LEGGINGS
+      - NETHERITE_BOOTS
   Frame:
 HitRewards:
   Mythical:
