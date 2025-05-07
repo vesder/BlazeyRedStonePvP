@@ -4,10 +4,8 @@ import me.vesder.blazeyRedStonePvP.BlazeyRedStonePvP;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Sound;
-import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.*;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Player;
 
 import java.util.List;
@@ -33,11 +31,11 @@ public class TextUtils {
 
     }
 
-    public static List<String> getStringListConfig(String path) {
-
-        return BlazeyRedStonePvP.getPlugin().getConfig().getStringList(path);
-
-    }
+//    public static List<String> getStringListConfig(String path) {
+//
+//        return BlazeyRedStonePvP.getPlugin().getConfig().getStringList(path);
+//
+//    }
 
     public static int getIntConfig(String path) {
 
@@ -45,17 +43,11 @@ public class TextUtils {
 
     }
 
-    public static ConfigurationSection getConfigSection(String path) {
-
-        return BlazeyRedStonePvP.getPlugin().getConfig().getConfigurationSection(path);
-
-    }
-
-    public static ConfigurationSection getMatFromConfig(String path) {
-
-        return BlazeyRedStonePvP.getPlugin().getConfig().getConfigurationSection(path);
-
-    }
+//    public static ConfigurationSection getConfigSection(String path) {
+//
+//        return BlazeyRedStonePvP.getPlugin().getConfig().getConfigurationSection(path);
+//
+//    }
 
     public static void playSoundFromString(Player player, String sound) {
 
@@ -66,6 +58,11 @@ public class TextUtils {
         player.playSound(player.getLocation(), Sound.valueOf(sound.toUpperCase()), 1.0f, 1.0f);
     }
 
+    public static void spawnParticles(World world, Particle particle, List<Location> locations, BlockData blockData) {
+        for (Location location : locations) {
+            world.spawnParticle(particle, location, 1, blockData);
+        }
+    }
 
     public static Optional<String> checkGadgetAtLocation(Location locationToCheck, List<String> gadgetList) {
 
