@@ -46,33 +46,35 @@ public class InteractListener implements Listener {
                     event.setCancelled(true);
 
                     int takeAmount = getIntConfig("Gadgets." + gadget + ".amount");
-                    Material takeMat = Material.matchMaterial(getStringConfig("Gadgets." + gadget + ".take"));
+                    Material takeMat = Objects.requireNonNull(Material
+                            .matchMaterial(getStringConfig("Gadgets." + gadget + ".take")));
 
                     if (gadget.equals("RepairAnvil")) {
 
                         ItemStack itemInHand = player.getInventory().getItemInMainHand();
 
                         if (itemInHand.isEmpty()) {
-                            player.sendMessage("EMPTY");
+                            player.sendMessage(color(getStringConfig("Gadgets." + gadget + ".Errors.empty")));
                             return;
                         }
 
                         if (!getStringListConfig("Gadgets." + gadget + ".repairableItems")
                                 .contains(itemInHand.getType().toString())) {
 
-                            player.sendMessage(color(getStringConfig("RepairAnvil.Errors.cant")));
+                            player.sendMessage(color(getStringConfig("Gadgets." + gadget + ".Errors.cant")));
                             return;
                         }
 
                         if (itemInHand instanceof Damageable damageable && damageable.getDamage() == 0) {
 
-                            player.sendMessage("FULL HEALTH");
+                            player.sendMessage(color(getStringConfig("Gadgets." + gadget + ".Errors.already")));
                             return;
                         }
 
-                        if (!player.getInventory().contains(Objects.requireNonNull(takeMat), takeAmount)) {
+                        if (!player.getInventory().contains(takeMat, takeAmount)) {
 
-                            player.sendMessage(color(getStringConfig("Gadgets." + gadget + ".Errors.money"), "amount", takeAmount));
+                            player.sendMessage(color(getStringConfig("Gadgets." + gadget + ".Errors.money"),
+                                    "amount", takeAmount));
                             return;
                         }
 
@@ -104,9 +106,10 @@ public class InteractListener implements Listener {
                     ItemStack giveItem = new ItemStack(Objects.requireNonNull(Material
                             .matchMaterial(getStringConfig("Gadgets." + gadget + ".give"))));
 
-                    if (!player.getInventory().contains(Objects.requireNonNull(takeMat), takeAmount)) {
+                    if (!player.getInventory().contains(takeMat, takeAmount)) {
 
-                        player.sendMessage(color(getStringConfig("Gadgets." + gadget + ".Errors.money"), "amount", takeAmount));
+                        player.sendMessage(color(getStringConfig("Gadgets." + gadget + ".Errors.money"),
+                                "amount", takeAmount));
                         return;
                     }
 
