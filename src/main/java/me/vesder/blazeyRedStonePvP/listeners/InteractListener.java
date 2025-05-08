@@ -46,6 +46,13 @@ public class InteractListener implements Listener {
 
                     if (gadget.equals("RepairAnvil")) {
 
+                        if (!getStringListConfig("Gadgets." + gadget + ".repairableItems")
+                                .contains(player.getInventory().getItemInMainHand().getType().toString())) {
+
+                            player.sendMessage(color(getStringConfig("RepairAnvil.Errors.cant")));
+                            return;
+                        }
+
                         Location centerLocation = clickedLocation.clone().add(0.50, 1, 0.50);
 
                         Item droppedItem = event.getClickedBlock().getWorld()
