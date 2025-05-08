@@ -65,7 +65,7 @@ public class InteractListener implements Listener {
                             return;
                         }
 
-                        if (itemInHand instanceof Damageable damageable && damageable.getDamage() == 0) {
+                        if (itemInHand.getItemMeta() instanceof Damageable damageable && damageable.getDamage() == 0) {
 
                             player.sendMessage(color(getStringConfig("Gadgets." + gadget + ".Errors.already")));
                             return;
