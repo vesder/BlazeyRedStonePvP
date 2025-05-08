@@ -31,11 +31,11 @@ public class TextUtils {
 
     }
 
-//    public static List<String> getStringListConfig(String path) {
-//
-//        return BlazeyRedStonePvP.getPlugin().getConfig().getStringList(path);
-//
-//    }
+    public static List<String> getStringListConfig(String path) {
+
+        return BlazeyRedStonePvP.getPlugin().getConfig().getStringList(path);
+
+    }
 
     public static int getIntConfig(String path) {
 
