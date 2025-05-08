@@ -45,6 +45,9 @@ public class InteractListener implements Listener {
                     Player player = event.getPlayer();
                     event.setCancelled(true);
 
+                    int takeAmount = getIntConfig("Gadgets." + gadget + ".amount");
+                    Material takeMat = Material.matchMaterial(getStringConfig("Gadgets." + gadget + ".take"));
+
                     if (gadget.equals("RepairAnvil")) {
 
                         ItemStack itemInHand = player.getInventory().getItemInMainHand();
@@ -64,6 +67,17 @@ public class InteractListener implements Listener {
                         if (itemInHand instanceof Damageable damageable && damageable.getDamage() == 0) {
 
                             player.sendMessage("FULL HEALTH");
+                            return;
+                        }
+
+                        if (!player.getInventory().contains(Objects.requireNonNull(takeMat), takeAmount)) {
+
+                            player.sendMessage(color(getStringConfig("Gadgets." + gadget + ".message"), "amount", takeAmount));
+                            return;
+                        }
+
+                        if (player.getInventory().firstEmpty() == -1) {
+                            sendInvFullMsg(player);
                             return;
                         }
 
@@ -87,10 +101,6 @@ public class InteractListener implements Listener {
                     }
 
                     //OTHER STUFF
-
-                    int takeAmount = getIntConfig("Gadgets." + gadget + ".amount");
-                    Material takeMat = Material.matchMaterial(getStringConfig("Gadgets." + gadget + ".take"));
-
                     ItemStack giveItem = new ItemStack(Objects.requireNonNull(Material
                             .matchMaterial(getStringConfig("Gadgets." + gadget + ".give"))));
 
