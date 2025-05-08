@@ -72,7 +72,7 @@ public class InteractListener implements Listener {
 
                         if (!player.getInventory().contains(Objects.requireNonNull(takeMat), takeAmount)) {
 
-                            player.sendMessage(color(getStringConfig("Gadgets." + gadget + ".message"), "amount", takeAmount));
+                            player.sendMessage(color(getStringConfig("Gadgets." + gadget + ".Errors.money"), "amount", takeAmount));
                             return;
                         }
 
@@ -106,7 +106,7 @@ public class InteractListener implements Listener {
 
                     if (!player.getInventory().contains(Objects.requireNonNull(takeMat), takeAmount)) {
 
-                        player.sendMessage(color(getStringConfig("Gadgets." + gadget + ".message"), "amount", takeAmount));
+                        player.sendMessage(color(getStringConfig("Gadgets." + gadget + ".Errors.money"), "amount", takeAmount));
                         return;
                     }
 
