@@ -12,6 +12,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
@@ -46,17 +47,30 @@ public class InteractListener implements Listener {
 
                     if (gadget.equals("RepairAnvil")) {
 
+                        ItemStack itemInHand = player.getInventory().getItemInMainHand();
+
+                        if (itemInHand.isEmpty()) {
+                            player.sendMessage("EMPTY");
+                            return;
+                        }
+
                         if (!getStringListConfig("Gadgets." + gadget + ".repairableItems")
-                                .contains(player.getInventory().getItemInMainHand().getType().toString())) {
+                                .contains(itemInHand.getType().toString())) {
 
                             player.sendMessage(color(getStringConfig("RepairAnvil.Errors.cant")));
+                            return;
+                        }
+
+                        if (itemInHand instanceof Damageable damageable && damageable.getDamage() == 0) {
+
+                            player.sendMessage("FULL HEALTH");
                             return;
                         }
 
                         Location centerLocation = clickedLocation.clone().add(0.50, 1, 0.50);
 
                         Item droppedItem = event.getClickedBlock().getWorld()
-                                .dropItem(centerLocation, player.getInventory().getItemInMainHand());
+                                .dropItem(centerLocation, itemInHand);
 
                         droppedItem.setPickupDelay(Integer.MAX_VALUE);
                         droppedItem.setVelocity(new Vector(0, 0, 0));
@@ -72,9 +86,13 @@ public class InteractListener implements Listener {
                         return;
                     }
 
+                    //OTHER STUFF
+
                     int takeAmount = getIntConfig("Gadgets." + gadget + ".amount");
                     Material takeMat = Material.matchMaterial(getStringConfig("Gadgets." + gadget + ".take"));
-                    ItemStack giveItem = new ItemStack(Objects.requireNonNull(Material.matchMaterial(getStringConfig("Gadgets." + gadget + ".give"))));
+
+                    ItemStack giveItem = new ItemStack(Objects.requireNonNull(Material
+                            .matchMaterial(getStringConfig("Gadgets." + gadget + ".give"))));
 
                     if (!player.getInventory().contains(Objects.requireNonNull(takeMat), takeAmount)) {
 
